@@ -457,7 +457,12 @@ KBUILD_USERLDFLAGS := $(USERLDFLAGS)
 # These flags apply to all Rust code in the tree, including the kernel and
 # host programs.
 export rust_common_flags := --edition=2021 \
+			    --verbose \
 			    -Zbinary_dep_depinfo=y \
+			    -Zcodegen-backend=/home/$(USER)/Ordinateur/Programmation/Rust/Projets/rustc_codegen_gcc/target/debug/librustc_codegen_gcc.so \
+			    --sysroot /home/$(USER)/Ordinateur/Programmation/Rust/Projets/rustc_codegen_gcc/build_sysroot/sysroot \
+			    -Cpanic=abort \
+			    -Clto=off \
 			    -Dunsafe_op_in_unsafe_fn -Drust_2018_idioms \
 			    -Dunreachable_pub -Dnon_ascii_idents \
 			    -Wmissing_docs \
@@ -908,6 +913,7 @@ endif
 # Initialize all stack variables with a zero value.
 ifdef CONFIG_INIT_STACK_ALL_ZERO
 KBUILD_CFLAGS	+= -ftrivial-auto-var-init=zero
+KBUILD_CFLAGS	+= -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang
 ifdef CONFIG_CC_IS_CLANG
 # https://bugs.llvm.org/show_bug.cgi?id=45497
 KBUILD_CFLAGS	+= -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang

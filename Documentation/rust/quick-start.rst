@@ -211,6 +211,10 @@ For architectures that do not support a full LLVM toolchain, use::
 
 	make CC=clang
 
+To compile with rustc_codegen_gcc, use::
+
+	make
+
 Using GCC also works for some configurations, but it is very experimental at
 the moment.
 
